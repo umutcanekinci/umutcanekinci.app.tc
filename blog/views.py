@@ -10,8 +10,16 @@ def post_list(request: WSGIRequest):
     
     fullPath = request.get_full_path()
     page = '/home' if fullPath == '/' else fullPath
-    pageTitle = page.replace('_', ' ').title().removeprefix('/')
+
+    try:
+
+        pageTitle = page.replace('_', ' ').title().removeprefix('/')
+
+    except:
+
+        pageTitle = 'Home'
+
     path = TEMPLATE+page+'.html'
 
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, path, {'title': TITLE, 'subtitle': SUBTITLE, 'page': 'title'})
+    return render(request, path, {'title': TITLE, 'subtitle': SUBTITLE, 'page': pageTitle})
