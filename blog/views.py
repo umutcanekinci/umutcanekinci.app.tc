@@ -27,4 +27,5 @@ def post_list(request: WSGIRequest):
 
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     projects = Project.objects.all()
+    
     return render(request, path, {'title': TITLE, 'subtitle': SUBTITLE, 'page': pageTitle, 'projects': projects})
