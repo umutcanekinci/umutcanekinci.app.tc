@@ -13,7 +13,7 @@ def post_list(request: WSGIRequest):
 
     try:
         
-        pageTitle = page.title().removeprefix('/')
+        pageTitle = page.title()
 
     except:
 
