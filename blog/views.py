@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Post
+from .models import Post, Project
 from django.core.handlers.wsgi import WSGIRequest
 TITLE = "Umutcan Ekinci"
 SUBTITLE = "Software Engineer"
@@ -14,7 +14,7 @@ def post_list(request: WSGIRequest):
     try:
         
         pageTitle = page.replace('_', ' ').title()
-        
+
         if pageTitle.startswith('/'):
 
             pageTitle = pageTitle[1:]
@@ -26,4 +26,5 @@ def post_list(request: WSGIRequest):
     path = TEMPLATE+page+'.html'
 
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, path, {'title': TITLE, 'subtitle': SUBTITLE, 'page': pageTitle})
+    projects = Project.objects.all()
+    return render(request, path, {'title': TITLE, 'subtitle': SUBTITLE, 'page': pageTitle, 'projects': projects})
