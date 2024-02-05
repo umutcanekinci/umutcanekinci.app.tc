@@ -14,6 +14,10 @@ def post_list(request: WSGIRequest):
     try:
         
         pageTitle = page.replace('_', ' ').title()
+        
+        if pageTitle.startswith('/'):
+
+            pageTitle = pageTitle[1:]
 
     except:
 
