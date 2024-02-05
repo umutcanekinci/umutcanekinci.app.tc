@@ -10,6 +10,7 @@ def post_list(request: WSGIRequest):
     
     fullPath = request.get_full_path()
     page = '/home' if fullPath == '/' else fullPath
+    pageTitle = page.replace('_', ' ').title().removeprefix('/')
     path = TEMPLATE+page+'.html'
 
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
