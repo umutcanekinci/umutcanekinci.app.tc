@@ -11,4 +11,4 @@ def post_list(request: WSGIRequest):
     fullPath = request.get_full_path()
     path = TEMPLATE+'/'+'home.html' if fullPath == '/' else TEMPLATE+'/'+fullPath+'.html'
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, path, {'title': TITLE, 'subtitle': SUBTITLE, 'page': fullPath.upper()})
+    return render(request, path, {'title': TITLE, 'subtitle': SUBTITLE, 'page': fullPath.capitalize()})
