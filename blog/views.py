@@ -9,6 +9,9 @@ TEMPLATE = 'default'
 def post_list(request: WSGIRequest):
     
     fullPath = request.get_full_path()
-    path = TEMPLATE+'/'+'home.html' if fullPath == '/' else TEMPLATE+'/'+fullPath+'.html'
+    page = '/home' if fullPath == '/' else fullPath
+    pageTitle = page.replace('_', ' ').title().removeprefix('/')
+    path = TEMPLATE+page+'.html'
+
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, path, {'title': TITLE, 'subtitle': SUBTITLE, 'page': fullPath.capitalize()})
+    return render(request, path, {'title': TITLE, 'subtitle': SUBTITLE, 'page': pageTitle})
