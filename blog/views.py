@@ -14,8 +14,6 @@ def post_list(request: WSGIRequest):
     try:
         
         pageTitle = page.replace('_', ' ').title()
-        if pageTitle[0] == '/':
-            pageTitle = pageTitle.removeprefix('/')
 
     except:
 
