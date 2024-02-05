@@ -12,8 +12,8 @@ def post_list(request: WSGIRequest):
     page = '/home' if fullPath == '/' else fullPath
 
     try:
-
-        pageTitle = page.replace('_', ' ').title().removeprefix('/')
+        
+        pageTitle = page.title().removeprefix('/')
 
     except:
 
