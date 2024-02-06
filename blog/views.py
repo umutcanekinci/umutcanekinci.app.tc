@@ -29,3 +29,8 @@ def post_list(request: WSGIRequest):
     projects = Project.objects.all()
     
     return render(request, path, {'title': TITLE, 'subtitle': SUBTITLE, 'page': pageTitle, 'projects': projects})
+
+def Custom404(request, exception):
+    page = '404'
+    path = TEMPLATE+page+'.html'
+    return render(request, path, status=404)
