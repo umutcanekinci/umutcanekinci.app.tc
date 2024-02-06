@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+# Custom Settings
+TITLE = "Umutcan Ekinci"
+TEMPLATE = 'default'
+ABOUT_SUBTITLE = "Software Engineer"
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -30,7 +35,7 @@ STATIC_ROOT = BASE_DIR  / 'static'
 SECRET_KEY = 'django-insecure-vvqa=(1@0yb0a+0_0d&ac+ij%=nrmda4da)n@y=ebxo1im-1vm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 

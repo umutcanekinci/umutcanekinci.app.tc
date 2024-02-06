@@ -2,35 +2,46 @@ from django.shortcuts import render
 from django.utils import timezone
 from .models import Post, Project
 from django.core.handlers.wsgi import WSGIRequest
-TITLE = "Umutcan Ekinci"
-SUBTITLE = "Software Engineer"
-TEMPLATE = 'default'
+from django.conf import settings
 
-def post_list(request: WSGIRequest):
+def GetTemplateName(page: str):
+
+    """
     
-    fullPath = request.get_full_path()
-    page = '/home' if fullPath == '/' else fullPath
+    TemplateName is the page path which will be rendered.
+    
+    """
+
+    if not page.startswith('/'):
+        
+        page = '/' + page
+
+    return settings.TEMPLATE+page+'.html'
+
+def GetTitle(page: str):
 
     try:
         
-        pageTitle = page.replace('_', ' ').title()
+        if page.startswith('/'):
 
-        if pageTitle.startswith('/'):
+            page = page[1:]
 
-            pageTitle = pageTitle[1:]
+        return page.replace('_', ' ').title()
 
     except:
 
-        pageTitle = 'Home'
+        return 'Home'
 
-    path = TEMPLATE+page+'.html'
+def post_list(request: WSGIRequest):
+
+    fullPath = request.get_full_path()
+    page = '/home' if fullPath == '/' else fullPath
 
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     projects = Project.objects.all()
     
-    return render(request, path, {'title': TITLE, 'subtitle': SUBTITLE, 'page': pageTitle, 'projects': projects})
+    return render(request, GetTemplateName(page), {'title': settings.TITLE, 'pageTitle': GetTitle(page), 'aboutSubtitle': settings.ABOUT_SUBTITLE, 'projects': projects})
 
 def Custom404(request, exception):
-    page = '404'
-    path = TEMPLATE+page+'.html'
-    return render(request, path, status=404)
+
+    return render(request, GetTemplateName('404'), {'title': settings.TITLE, 'pageTitle': 'Page Not Found !'}, status=404)
