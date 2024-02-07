@@ -1,0 +1,82 @@
+{% extends TEMPLATE|add:'/base.html' %}
+{% load static %}
+
+{% block nav %}
+
+    <!-- [NAV]
+    ============================================================================================================================-->    
+    <!-- Navigation
+    ==========================================-->
+    <nav  class=" nim-menu navbar navbar-default navbar-fixed-top">
+        <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">N<span class="themecolor">i</span>M</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% static TEMPLATE|add:'/#home' %} " class="page-scroll">Home</a></li>
+        <li><a href="{% static TEMPLATE|add:'/#one' %} " class="page-scroll">About</a></li>
+        <li><a href="{% static TEMPLATE|add:'/#two' %} " class="page-scroll">Our Works</a></li>
+        <li><a href="{% static TEMPLATE|add:'/#three' %} " class="page-scroll">Team</a></li>
+        <li><a href="{% static TEMPLATE|add:'/#four' %} " class="page-scroll">Inspiration</a></li>
+        <li><a href="{% static TEMPLATE|add:'/#five' %} " class="page-scroll">Status</a></li>
+        <li><a href="{% static TEMPLATE|add:'/#six' %} " class="page-scroll">Testimonials</a></li>
+        <li><a href="{% static TEMPLATE|add:'/#seven' %} " class="page-scroll">Services</a></li>
+        <li><a href="{% static TEMPLATE|add:'/#eight' %} " class="page-scroll">Contact</a></li>
+        </ul>
+        </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+        </nav>
+
+
+        <!-- [/NAV]
+        ============================================================================================================================--> 
+    
+
+{% endblock nav %}
+
+{% block footer %}
+
+    <!-- [FOOTER]
+    ============================================================================================================================-->
+
+    <footer class="site-footer section-spacing text-center " id="eight">
+
+        <div class="container">
+        <div class="row">
+        <div class="col-md-4">
+        <p class="footer-links"><a href="{% static TEMPLATE|add:'/#' %} ">Terms of Use</a> <a href="{% static TEMPLATE|add:'/#' %} ">Privacy Policy</a></p>
+        </div>
+        <div class="col-md-4"> <small>&copy; 2015 Nim. All rights reserved.</small></div>
+        <div class="col-md-4"> 
+        <!--social-->
+
+        <ul class="social">
+        <li><a href="/https://twitter.com/" target="_blank"><i class="fa fa-twitter "></i></a></li>
+        <li><a href="/https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="/https://www.youtube.com/" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+        </ul>
+
+        <!--social end--> 
+
+        </div>
+        </div>
+        </div>
+        </footer>
+
+
+
+        <!-- [/FOOTER]
+        ============================================================================================================================-->
+    
+
+{% endblock footer %}

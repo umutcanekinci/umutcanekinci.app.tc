@@ -3,10 +3,10 @@ from . import views
 
 urlpatterns = [
 
-    path('', views.post_list, name='post_list'),
-    path('home', views.post_list, name='post_list'),
-    path('projects', views.post_list, name='post_list'),
-    path('useful_links', views.post_list, name='post_list'),
-    path('about', views.post_list, name='post_list'),
+    path('', views.Render, name='Render'),
+    path('home', views.Render, name='Render'),
+    path('projects', views.Render, name='Render'),
+    path('useful_links', views.Render, name='Render'),
+    path('about', views.Render, name='Render'),
 
 ]

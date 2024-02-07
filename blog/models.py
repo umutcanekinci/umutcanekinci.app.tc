@@ -21,7 +21,7 @@ class Project(models.Model):
 
     name = models.CharField(max_length=200)
     description = models.TextField()
-    thumbnail = models.ImageField(upload_to='img')
+    thumbnail = models.ImageField(upload_to='blog/static/images/projects/')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     text = models.TextField()
