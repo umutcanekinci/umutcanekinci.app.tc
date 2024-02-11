@@ -11,23 +11,32 @@
 """
 
 from pathlib import Path
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+from os.path import join
 
 # Custom Settings
 TITLE = "Umutcan Ekinci"
 TEMPLATE = 'default'
 ABOUT_SUBTITLE = "Software Engineer"
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+DEBUG = True # SECURITY WARNING: don't run with debug turned on in production!
+
+BASE_DIR = Path(__file__).resolve().parent.parent # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR  / 'static'
+
+
+if not DEBUG: # Static root works only deployment, it is useless during development (When Debug=True)
+    
+    STATIC_ROOT = BASE_DIR  / 'static'  # I think this is for using collectstatic in server
+
+
+#STATICFILES_DIRS = [
+
+#    join(BASE_DIR, '/static/' + TEMPLATE),
+
 
 
 # Quick-start development settings - unsuitable for production
