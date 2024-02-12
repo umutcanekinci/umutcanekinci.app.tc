@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-from .models import Project
 from django.core.handlers.wsgi import WSGIRequest
 from django.conf import settings
 from django.http.response import HttpResponse
+
+from .models import Project
+from .forms import ProjectForm
+from taggit.models import Tag
 
 def GetPage(fullPath: str) -> str:
 
@@ -41,18 +44,42 @@ def Custom404(request, exception) -> HttpResponse:
 
     return render(request, GetTemplateName('404'), {'title': settings.TITLE, 'pageTitle': 'Page Not Found !'}, status=404)
 
-def _Render(request, page, **kwargs):
+def Render(request: WSGIRequest, page: str=None, **kwargs) -> HttpResponse:
 
-    return render(request, GetTemplateName(page), {'title': settings.TITLE, 'pageTitle': GetTitle(page), 'TEMPLATE': settings.TEMPLATE, **kwargs})
+    page = GetPage(request.get_full_path()) if not page else page
+    context = {
+        'title': settings.TITLE,
+        'pageTitle': GetTitle(page),
+        'TEMPLATE': settings.TEMPLATE,
+        **kwargs
+    }
 
-def ProjectDetail(request, pk):
+    return render(request, GetTemplateName(page), context)
 
-    project = Project.objects.get(pk=pk)
-    return _Render(request, 'project_detail', project= project)
+def Projects(request):
 
-def Render(request: WSGIRequest) -> HttpResponse:
-
-    page = GetPage(request.get_full_path())
     projects = Project.objects.all() # Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+
+    return Render(request, projects=projects)
+
+def AddProject(request):
+
+    projects = Project.objects.all() # Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    commonTags = Project.tags.most_common()[:4],
     
-    return _Render(request, page, aboutSubtitle=settings.ABOUT_SUBTITLE, projects=projects)
+    form = ProjectForm(request.POST)
+
+    if form.is_valid():
+
+        newPro = form.save(commit=False)
+    
+    return Render(request, 'add_project', form=form, projects=projects)
+
+def ProjectDetail(request, slug):
+
+    project = get_object_or_404(Project, slug=slug)
+    return Render(request, 'project_detail', pageTitle=project.name, project= project)
+
+def About(request):
+
+    return Render(request, aboutSubtitle=settings.ABOUT_SUBTITLE)

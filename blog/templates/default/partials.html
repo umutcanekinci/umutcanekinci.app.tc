@@ -7,7 +7,7 @@
         <div class="container-fluid d-flex justify-content-between align-items-center">
             
             <!-- Brand -->
-            <a class="navbar-brand" href="./">
+            <a class="navbar-brand" href="{% url 'base_root' %}">
     
                 <img src="{% static TEMPLATE|add:'/images/favicon.ico' %}" width="30" height="30" class="d-inline-block align-top mt-1" alt="">
                 {{ title }}
@@ -34,11 +34,11 @@
                         <li class="nav-item">
                             {% if pageTitle == 'Home' %}
                             
-                                <a href="home" class="nav-link active" aria-current="page" >
+                                <a href="{% url 'home' %}" class="nav-link active" aria-current="page" >
     
                             {% else %}
     
-                                <a href="home" class="nav-link" aria-current="page" >
+                                <a href="{% url 'home' %}" class="nav-link" aria-current="page" >
     
                             {% endif %}
                             
@@ -49,11 +49,11 @@
                         <li class="nav-item">
                             {% if pageTitle == 'Projects' %}
                             
-                                <a href="projects" class="nav-link active" aria-current="page" >
+                                <a href="{% url 'projects' %}" class="nav-link active" aria-current="page" >
     
                             {% else %}
     
-                                <a href="projects" class="nav-link" aria-current="page" >
+                                <a href="{% url 'projects' %}" class="nav-link" aria-current="page" >
     
                             {% endif %}
                             
@@ -64,11 +64,11 @@
                         <li class="nav-item">
                             {% if pageTitle == 'Useful Links' %}
                             
-                                <a href="useful_links" class="nav-link active" aria-current="page" >
+                                <a href="{% url 'useful_links' %}" class="nav-link active" aria-current="page" >
     
                             {% else %}
     
-                                <a href="useful_links" class="nav-link" aria-current="page" >
+                                <a href="{% url 'useful_links' %}" class="nav-link" aria-current="page" >
     
                             {% endif %}
                             
@@ -79,11 +79,11 @@
                         <li class="nav-item">
                             {% if pageTitle == 'About' %}
                             
-                                <a href="about" class="nav-link active" aria-current="page" >
+                                <a href="{% url 'about' %}" class="nav-link active" aria-current="page" >
     
                             {% else %}
     
-                                <a href="about" class="nav-link" aria-current="page" >
+                                <a href="{% url 'about' %}" class="nav-link" aria-current="page" >
     
                             {% endif %}
                             
@@ -230,9 +230,8 @@
     <br>
     <br>
 
-    <footer id="footer" class="position-absolute bottom-0 start-50 translate-middle text-white-50 mb-3" style="font-size: 13px;">
-        <p style="margin-bottom: -3px;">Copyright ®2024 - Umutcan Ekinci. All rights reserved.</p>
-        <!--<p>This website had made by Umutcan Ekinci with Bootstrap v5.3 and Django.</p>-->
+    <footer id="footer" class="position-absolute bottom-0 start-50 translate-middle text-white-50 mb-1" style="font-size: 13px;">
+        <p>Copyright ®2024 - Umutcan Ekinci. All rights reserved.</p>
     </footer>
 
 {% endblock %}

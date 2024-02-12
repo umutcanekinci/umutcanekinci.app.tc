@@ -44,13 +44,13 @@
 
                         <div class="card-body">
 
-                            <h3 class="border-bottom pb-3"> {{ project.title }} </h3>
+                            <h3 class="border-bottom pb-3"> {{ project }} </h3>
 
                             <p class="card-text py-2"> {{ project.description }} </p>
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="{% url 'ProjectDetail' pk=project.pk %}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                                    <a href="{% url 'project_detail' slug=project.slug %}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
                                 </div>
                                 <small class="text-body-secondary">9 mins</small>
                             </div>
