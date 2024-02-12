@@ -8,5 +8,5 @@ urlpatterns = [
     path('projects', views.Render, name='Render'),
     path('useful_links', views.Render, name='Render'),
     path('about', views.Render, name='Render'),
-
+    path('project/<int:pk>/', views.ProjectDetail, name='ProjectDetail'),
 ]

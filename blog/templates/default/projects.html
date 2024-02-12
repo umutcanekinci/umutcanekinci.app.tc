@@ -31,7 +31,7 @@
                         -->
 
                         <div class="">
-                            <img width="100%" height="100%" src="{% static TEMPLATE|add:"/images/bg.jpg" %}" alt="">
+                            <img width="100%" height="100%" src="{{ project.thumbnail.url }}" alt="">
                         </div>
                         
                         <!--
@@ -50,7 +50,7 @@
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="#" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                                    <a href="{% url 'ProjectDetail' pk=project.pk %}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
                                 </div>
                                 <small class="text-body-secondary">9 mins</small>
                             </div>

@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings  # new
+from django.conf.urls.static import static
 
 handler404 = 'blog.views.Custom404'
 
@@ -24,3 +26,5 @@ urlpatterns = [
     path('', include('blog.urls')),
 ]
 
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

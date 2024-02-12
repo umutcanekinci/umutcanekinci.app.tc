@@ -29,9 +29,11 @@ STATIC_URL = 'static/'
 
 
 if not DEBUG: # Static root works only deployment, it is useless during development (When Debug=True)
-    
+
     STATIC_ROOT = BASE_DIR  / 'static'  # I think this is for using collectstatic in server
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 #STATICFILES_DIRS = [
 

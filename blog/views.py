@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Project
 from django.core.handlers.wsgi import WSGIRequest
@@ -41,9 +41,18 @@ def Custom404(request, exception) -> HttpResponse:
 
     return render(request, GetTemplateName('404'), {'title': settings.TITLE, 'pageTitle': 'Page Not Found !'}, status=404)
 
+def _Render(request, page, **kwargs):
+
+    return render(request, GetTemplateName(page), {'title': settings.TITLE, 'pageTitle': GetTitle(page), 'TEMPLATE': settings.TEMPLATE, **kwargs})
+
+def ProjectDetail(request, pk):
+
+    project = Project.objects.get(pk=pk)
+    return _Render(request, 'project_detail', project= project)
+
 def Render(request: WSGIRequest) -> HttpResponse:
 
     page = GetPage(request.get_full_path())
     projects = Project.objects.all() # Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     
-    return render(request, GetTemplateName(page), {'title': settings.TITLE, 'pageTitle': GetTitle(page), 'aboutSubtitle': settings.ABOUT_SUBTITLE, 'projects': projects, 'TEMPLATE': settings.TEMPLATE})
+    return _Render(request, page, aboutSubtitle=settings.ABOUT_SUBTITLE, projects=projects)
