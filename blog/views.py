@@ -56,13 +56,23 @@ def Render(request: WSGIRequest, page: str=None, **kwargs) -> HttpResponse:
 
     return render(request, GetTemplateName(page), context)
 
-def Projects(request):
+def Projects(request: WSGIRequest) -> HttpResponse:
 
     projects = Project.objects.all() # Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    tags = Project.tags.order_by('slug') #.most_common()[:4]
+    
+    return Render(request, projects=projects, tags=tags)
 
-    return Render(request, projects=projects)
+def TaggedProjects(request: WSGIRequest, slug):
 
-def AddProject(request):
+    tag = get_object_or_404(Tag, slug=slug)
+    tags = Project.tags.order_by('slug') #.most_common()[:4]
+
+    projects = Project.objects.filter(tags=tag)
+    
+    return Render(request, 'projects', projects=projects, tags=tags, currentTag=tag)
+
+def AddProject(request: WSGIRequest) -> HttpResponse:
 
     projects = Project.objects.all() # Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     commonTags = Project.tags.most_common()[:4],
@@ -75,11 +85,11 @@ def AddProject(request):
     
     return Render(request, 'add_project', form=form, projects=projects)
 
-def ProjectDetail(request, slug):
+def ProjectDetail(request: WSGIRequest, slug) -> HttpResponse:
 
     project = get_object_or_404(Project, slug=slug)
     return Render(request, 'project_detail', pageTitle=project.name, project= project)
 
-def About(request):
+def About(request: WSGIRequest) -> HttpResponse:
 
     return Render(request, aboutSubtitle=settings.ABOUT_SUBTITLE)

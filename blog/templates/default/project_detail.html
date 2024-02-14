@@ -1,8 +1,14 @@
 {% extends TEMPLATE|add:'/partials.html' %}
 {% load static %}
 
-{% block page %}
+{% block content %}
 
-<img src="{{project.thumbnail.url}}" alt="">
+    <div class="card-fluid bg-dark">
+
+        <h1 class="text-lg" href="">{{ project.name}}</h1>
+        <img height="100%" src="{{project.thumbnail.url}}" alt="">
+
+    </div>
+    
 
 {% endblock %}
