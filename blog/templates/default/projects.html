@@ -34,30 +34,25 @@
             </ul>
         </header>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-            
-            {% for project in projects %}
-                
-                <div class="col">
-                    <div class="card shadow-sm">
+        <div class="row" data-masonry='{"percentPosition": true }'>
 
-                        <div class="container-fluid border-bottom
+            {% for project in projects %}
+
+                <div class="col-3">
+                    <div class="card shadow-sm mt-4">
+
+                        <div style="text-transform: uppercase;" class="container-fluid border-bottom
                         {% if project.project_type == project.APPLICATION %}bg-primary{% endif %}
                         {% if project.project_type == project.GAME %}bg-danger{% endif %}
-                        " style="text-transform: uppercase;">{{project.project_type}}
+                        ">
+
+                            {{ project.project_type }}
+
                         </div>
 
                         <div>
-                            <img width="100%" height="100%" src="{{ project.thumbnail.url }}" alt="">
+                            <img width="100%" height="100%" class="img-responsive" src="{{ project.thumbnail.url }}" alt="">
                         </div>
-                        
-                        <!--
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                                <title>Placeholder</title>
-                                <rect width="100%" height="100%" fill="#55595c"></rect>
-                                <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                            </svg>
-                        -->
 
                         <div class="card-body">
 
@@ -66,20 +61,18 @@
 
                             <div class="d-flex justify-content-between align-items-center border-bottom pb-3">
                                 
-                                
                                 <a href="{% url 'project_detail' slug=project.slug %}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                                
-                                          
+                                        
                                 <a href="{{ project.repo }}" type="button" class="btn btn-dark bg-dark-subtle text-secondary-emphasis" target="_blank">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
                                         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
                                     </svg>
                                     Source
                                 </a>
-                                <!--<small class="text-body-secondary">9 mins</small>-->
+
                             </div>
                             
-                            <!-- Tags -->
+                            <!-- Project Tags -->
                             <div class="align-items-center mt-3">
 
                                     {% for tag in project.tags.all|dictsort:'slug' %}
@@ -112,5 +105,4 @@
         </div>
 
     </div>
-
 {% endblock %}
