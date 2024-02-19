@@ -60,7 +60,9 @@ def Projects(request: WSGIRequest) -> HttpResponse:
 
     projects = Project.objects.all() # Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     tags = Project.tags.order_by('slug') #.most_common()[:4]
-    
+    for project in projects:
+
+        project.save()
     return Render(request, projects=projects, tags=tags)
 
 def TaggedProjects(request: WSGIRequest, slug):

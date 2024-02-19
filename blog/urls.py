@@ -14,6 +14,4 @@ urlpatterns = [
     path('useful_links', views.Render, name='useful_links'),
     path('about', views.About, name='about'),
     
-    
-
 ]

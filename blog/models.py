@@ -3,12 +3,12 @@ from django.db import models
 from django.utils import timezone
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
-from django.urls import reverse
 
 class Project(models.Model):
 
     name = models.CharField(max_length=200)
     description = models.TextField()
+
     repo = models.CharField(max_length=200)
     thumbnail = models.ImageField(upload_to='images/')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -37,6 +37,7 @@ class Project(models.Model):
 
             self.slug = slugify(self.name)
 
+        self.description_short = self.description[:180] + ' ...' if len(self.description) > 100 else self.description 
         super(Project, self).save(*args, **kwargs)
 
 
