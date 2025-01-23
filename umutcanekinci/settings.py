@@ -15,7 +15,7 @@ from os.path import join
 
 # Custom Settings
 TITLE = "Umutcan Ekinci"
-TEMPLATE = 'DevFolio'
+TEMPLATE = 'default'
 ABOUT_SUBTITLE = "Software Engineer"
 
 DEBUG = True # SECURITY WARNING: don't run with debug turned on in production!
